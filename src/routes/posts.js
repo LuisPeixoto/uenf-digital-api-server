@@ -9,11 +9,11 @@ router.get("/update", postController.post)
 router.get("/search", searchController.show)
 
 
-// function loop(){
-//    router.runMiddleware('/update')
-//    setTimeout(loop, 1800000)    
-// }
+function loop(){
+   router.runMiddleware('/update')
+   setTimeout(loop, 1800000)    
+}
 
-// loop()
+loop()
 
 module.exports = router
