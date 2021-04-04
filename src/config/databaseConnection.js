@@ -1,12 +1,14 @@
-const mysql = require("mysql")
+const mongoose = require('mongoose')
 
-var pool = mysql.createPool({
-    "connectionLimit": 5000,
-    "user": process.env.MYSQL_USER,
-    "password": process.env.MYSQL_PASSWORD,
-    "database": process.env.MYSQL_DATABASE,
-    "host": process.env.MYSQL_HOST,
-    "port": process.env.MYSQL_PORT,
-})
+mongoose.set('useNewUrlParser', true)
+mongoose.set('useCreateIndex', true)
 
-exports.pool = pool
+const URI = process.env.MONGO_DB
+
+const connectDB = async () => {
+    await mongoose.connect(URI, {
+        useUnifiedTopology:true,
+    })
+}
+
+module.exports = connectDB

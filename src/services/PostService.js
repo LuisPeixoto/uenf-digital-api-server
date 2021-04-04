@@ -19,7 +19,7 @@ class PostService {
 
                     for( var post of posts) {
                         var result = await database.find(post.title)
-                        if (result.length ==0) {
+                        if (!result) {
                             await database.insert(post)
                             await sendNotification(post)
                         }

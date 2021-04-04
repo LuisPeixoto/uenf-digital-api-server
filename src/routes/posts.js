@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const {postController, searchController} = require('../controllers')
+const { postController, searchController } = require('../controllers')
 require('run-middleware')(router)
 
 

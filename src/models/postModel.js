@@ -1,16 +1,14 @@
-const database = require('../database/execute')
-
+const database = require('../models/postSchema')
 
 module.exports = {
+
     async show(page) {
         try {
-            var query = `
-                SELECT * FROM  posts 
-                ORDER BY date DESC
-                LIMIT 10 
-                OFFSET ${page} ;
-            `
-            return await database.execute(query)
+            const limit = 10
+            return await database.find({})
+                .limit(limit * 1)
+                .skip(page)
+                .sort({ date: -1 })
 
         } catch (error) {
             if (error) { return res.status(500).send({ error: error }) }
@@ -21,53 +19,37 @@ module.exports = {
 
     async insert(data) {
         try {
-            const query = `
-            INSERT INTO posts(
-                title,
-                date,
-                url,
-                categories,
-                site,
-                image,
-                description
-            ) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        `
-
-            return await database.execute(
-                query,
-                [
-                    data.title,
-                    data.date,
-                    data.url,
-                    data.categories,
-                    data.site,
-                    data.image,
-                    data.description
-                ]
-            )
+            var data = new database(data)
+            data.save((err, data) => {
+                if (err) {
+                    return console.log(err)
+                }
+            })
 
         } catch (error) {
-            if (error) { return console.log(error)}
+            if (error) { return console.log('Erro', error) }
+
 
         }
     },
 
     async search(inputSearch, page) {
         try {
-            const query =
-                `SELECT * FROM posts
-                 WHERE title LIKE '%${inputSearch}%'
-                 OR description LIKE '%${inputSearch}%' 
-                 OR categories LIKE '%${inputSearch}%' 
-                 ORDER BY date DESC
-                 LIMIT 10 OFFSET ${page}; `
-
-            return await database.execute(query)
-
+            const limit = 10
+            return await database.find(
+                {
+                    $or: [
+                        { title: RegExp(inputSearch, 'i') },
+                        { description: RegExp(inputSearch, 'i') },
+                        { categories: RegExp(inputSearch, 'i') }
+                    ]
+                })
+                .limit(limit * 1)
+                .skip(page)
+                .sort({ date: -1 })
 
         } catch (error) {
-            if (error) { return res.status(500).send({ error: error }) }
+            if (error) { return console.log('Erro', error) }
 
         }
 
@@ -75,16 +57,12 @@ module.exports = {
 
     async find(title) {
         try {
-            const query = `
-            SELECT * FROM posts
-                WHERE title = '${title}' ;`
-
-
-            return await database.execute(query)
-
+            const query = await database.findOne({ 'title': title })
+            return query
 
         } catch (error) {
-            if (error) { return res.status(500).send({ error: error }) }
+            if (error) { return console.log('Erro', error) }
+
 
         }
 

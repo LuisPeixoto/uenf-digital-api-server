@@ -16,10 +16,12 @@ const postController = {
         }
     },
 
-    async post() {
+    async post(req, res) {
         try {
-            await checkAndAddPost("https://uenf.br/portal/wp-json/wp/v2/posts?_embed&per_page=10&page=1", "UENF")
+            await checkAndAddPost("https://uenf.br/portal/wp-json/wp/v2/posts?_embed&per_page=15&page=1", "UENF")
             await checkAndAddPost("https://plataforma.uenf.br/wp-json/wp/v2/posts?_embed&per_page=5&page=1", "UENF DIGITAL")
+
+            return console.log('Concluido')
 
         } catch (error) {
             if (error) { console.log(error) }
