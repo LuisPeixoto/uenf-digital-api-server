@@ -6,11 +6,8 @@ exports.outputFormatPost = async (data, site) => {
     for(var element of data) {
         var image = await this.getImage(element)
         post.push(this.insertPosts(element, image, site))
-
     }
-    
     console.log(site, post.length)
-
 
     return post
 }
@@ -26,7 +23,6 @@ exports.pagination = (Page) => {
 }
 
 exports.getImageJSON = async (imageURLJson) => {
-
     const imageurl = await axios.get(imageURLJson)
     if (imageurl.data.length > 0) {
         return await imageurl.data[0].guid.rendered
@@ -47,7 +43,6 @@ exports.insertPosts = (element, image, site) => {
     }
 }
 
-
 exports.getImage = async (item, imageURL) => {
     var image = null
     if (item.featured_media != 0) {
@@ -59,10 +54,6 @@ exports.getImage = async (item, imageURL) => {
     return image
 }
 
-
-
-
-
 exports.fixTextFormat = (text) => {
     return text
         .replace(/<[^>]*>?|\n|&nbsp;/gm, '')
@@ -72,7 +63,6 @@ exports.fixTextFormat = (text) => {
         .replace(/\&#8211;/gm, "-")
         .replace(/\&#8216;/gm, "‘")
         .replace(/\&#8217;/gm, "’")
-
 }
 
 exports.response = (data, page) => {
@@ -90,7 +80,5 @@ exports.response = (data, page) => {
                 description: this.fixTextFormat(post.description)
             }
         })
-
     }
 }
-

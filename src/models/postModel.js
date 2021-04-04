@@ -11,10 +11,8 @@ module.exports = {
                 .sort({ date: -1 })
 
         } catch (error) {
-            if (error) { return res.status(500).send({ error: error }) }
+            if (error) { return console.log('Erro', error) }
         }
-
-
     },
 
     async insert(data) {
@@ -28,8 +26,6 @@ module.exports = {
 
         } catch (error) {
             if (error) { return console.log('Erro', error) }
-
-
         }
     },
 
@@ -50,9 +46,7 @@ module.exports = {
 
         } catch (error) {
             if (error) { return console.log('Erro', error) }
-
         }
-
     },
 
     async find(title) {
@@ -62,10 +56,6 @@ module.exports = {
 
         } catch (error) {
             if (error) { return console.log('Erro', error) }
-
-
         }
-
     }
-
 }

@@ -24,8 +24,6 @@ class NotificationService {
             'body': JSON.stringify(notification_body)
         })
     }
-
 }
-
 
 module.exports = new NotificationService()
