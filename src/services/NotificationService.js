@@ -7,7 +7,7 @@ class NotificationService {
         var notification = {
             'title': fixTextFormat(title),
             'body': fixTextFormat(description),
-            'url': url,
+            'click_action': url,
         }
 
         var notification_body = {
