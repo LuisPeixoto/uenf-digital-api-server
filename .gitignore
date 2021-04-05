@@ -1,4 +1,3 @@
 /node_modules
 .directory
 nodemon.json
-Dockerfile
