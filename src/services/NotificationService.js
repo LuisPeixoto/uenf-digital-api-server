@@ -3,10 +3,11 @@ const config = require("../config/notificationKey")
 const { fixTextFormat } = require("../lib/utils")
 
 class NotificationService {
-    async sendNotification({ title, description }) {
+    async sendNotification({ title, description, url }) {
         var notification = {
             'title': fixTextFormat(title),
             'text': String(fixTextFormat(description).split('.', 1)),
+            'url': url,
         }
 
         var notification_body = {
