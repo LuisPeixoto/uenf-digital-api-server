@@ -11,15 +11,16 @@ class PostService {
                 { json: true },
                 async (err, response, body
                 ) => {
-                    if (err) { return  }
+                    if (err) { return }
 
                     const apiJson = JSON.parse(JSON.stringify(body))
                     const posts = await outputFormatPost(apiJson, nameSite)
-                    console.log(nameSite,posts.length)
+                    console.log(nameSite, posts.length)
 
-                    for( var post of posts) {
+                    for (var post of posts) {
                         var result = await database.find(post.title)
-                        if (!result) {
+
+                        if (typeof(result) != 'undefined' && !result) {
                             await database.insert(post)
                             await sendNotification(post)
                         }
@@ -29,7 +30,7 @@ class PostService {
 
                 })
         } catch (error) {
-            if (error) {console.log(error) }
+            if (error) { console.log(error) }
         }
     }
 

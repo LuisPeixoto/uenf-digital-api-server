@@ -6,8 +6,7 @@ class NotificationService {
     async sendNotification({ title, description, url }) {
         var notification = {
             'title': fixTextFormat(title),
-            'body': fixTextFormat(description),
-            'click_action': url,
+            'body': fixTextFormat(description)
         }
 
         var notification_body = {

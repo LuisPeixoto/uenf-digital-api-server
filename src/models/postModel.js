@@ -51,8 +51,7 @@ module.exports = {
 
     async find(title) {
         try {
-            const query = await database.findOne({ 'title': title })
-            return query
+            return await database.findOne({ 'title': title })
 
         } catch (error) {
             if (error) { return console.log('Erro', error) }
