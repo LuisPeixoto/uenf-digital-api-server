@@ -5,7 +5,7 @@ module.exports = {
     async show(page) {
         try {
             const limit = 10
-            return await database.find({})
+            return await database.find({categories:{$not:{$eq:'Associações estudantis'}}})
                 .limit(limit * 1)
                 .skip(page)
                 .sort({ date: -1 })

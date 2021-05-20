@@ -3,7 +3,7 @@ const axios = require("axios")
 exports.outputFormatPost = async (data, site) => {
     var post = []
 
-    for(var element of data) {
+    for (var element of data) {
         var image = await this.getImage(element)
         post.push(this.insertPosts(element, image, site))
     }
@@ -70,14 +70,26 @@ exports.response = (data, page) => {
         totalResults: data.length,
         page: parseInt(page || 1),
         posts: data.map(post => {
-            return {
-                title: this.fixTextFormat(post.title),
-                date: post.date,
-                url: post.url,
-                categories: post.categories,
-                site: post.site,
-                image: post.image,
-                description: this.fixTextFormat(post.description)
+            if (post.categories != '') {
+                return {
+                    title: this.fixTextFormat(post.title),
+                    date: post.date,
+                    url: post.url,
+                    categories: post.categories,
+                    site: post.site,
+                    image: post.image,
+                    description: this.fixTextFormat(post.description)
+                }
+
+            } else {
+                return {
+                    title: this.fixTextFormat(post.title),
+                    description: this.fixTextFormat(post.description),
+                    image: post.image,
+                    date: post.date,
+                    instagram: post.user_instagram,
+                    categories: post.categories,
+                }
             }
         })
     }
