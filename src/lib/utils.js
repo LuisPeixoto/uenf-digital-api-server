@@ -70,7 +70,10 @@ exports.response = (data, page) => {
         totalResults: data.length,
         page: parseInt(page || 1),
         posts: data.map(post => {
-            if (post.categories != '') {
+
+            
+            
+            if (post.categories != 'Associações estudantis') {
                 return {
                     title: this.fixTextFormat(post.title),
                     date: post.date,
@@ -80,14 +83,15 @@ exports.response = (data, page) => {
                     image: post.image,
                     description: this.fixTextFormat(post.description)
                 }
-
+                
             } else {
+                console.log(post.url)
                 return {
                     title: this.fixTextFormat(post.title),
                     description: this.fixTextFormat(post.description),
                     image: post.image,
                     date: post.date,
-                    instagram: post.user_instagram,
+                    instagram: post.url,
                     categories: post.categories,
                 }
             }
