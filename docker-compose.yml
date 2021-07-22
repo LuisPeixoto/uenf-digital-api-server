@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: uenf-digital-api-image
+    container_name: uenf-digital-api-container
+    restart: unless-stopped
+    ports:
+      - "80:8080"

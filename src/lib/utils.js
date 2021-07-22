@@ -69,9 +69,7 @@ exports.response = (data, page) => {
     return {
         totalResults: data.length,
         page: parseInt(page || 1),
-        posts: data.map(post => {
-
-            
+        posts: data.map(post => { 
             
             if (post.categories != 'Associações estudantis') {
                 return {
